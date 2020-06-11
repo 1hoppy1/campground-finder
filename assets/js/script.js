@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //This makes the Side Bar work
 document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('.sidenav');
@@ -22,3 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('.modal');
   var instances = M.Modal.init(elems);
 });
+=======
+// add key to open weather
+
+>>>>>>> 1169e6cfb980d1529e355a73a0f5f93c2fafe838
