@@ -19,7 +19,12 @@ h6 {
   padding: 15px;
 }
 
-#dropdown-menu {
+#state-dropdown-menu {
+  display: inline-block;
+  width: 25%;
+}
+
+#province-dropdown-menu {
   display: inline-block;
   width: 25%;
 }
