@@ -1,18 +1,6 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.hero-image {
-  /* campfire.jfif image source https://source.unsplash.com/S_VbdMTsdiA */
+:root {
   background-image: url("../images/campfire.jfif");
-  background-color: #cccccc;
-  height: 600px;
-  background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
-  position: relative;
 }
 
 .hero-text {
@@ -26,8 +14,20 @@
 
 }
 
-.search-wrapper {
-  display: flex
+h6 {
+  font-size: 25px;
+  padding: 15px;
+}
+
+#dropdown-menu {
+  display: inline-block;
+  width: 25%;
+}
+
+label {
+  font-size: 20px;
+  color: white;
+  padding: 10px;
 }
 
 
