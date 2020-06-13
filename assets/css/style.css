@@ -34,21 +34,22 @@ label {
   color: white;
   padding: 10px;
 }
-
-
-/* This CSS below in this notation is only needed if we want a fixed side navigation bar
-header,
-main,
-footer {
-  padding-left: 300px;
-}
-
-@media only screen and (max-width : 992px) {
-
-  header,
-  main,
-  footer {
-    padding-left: 0;
-  }
+/*
+.modal-checkbox-format {
+  display: flex;
+  flex-wrap: wrap;
 }
 */
+/*.checkbox-format {
+  display: block
+}
+*/
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.yellow {
+  background-color: yellow;
+}
