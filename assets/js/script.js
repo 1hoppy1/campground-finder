@@ -15,12 +15,13 @@ function getCampgroundData(area) {
         .then(function (data) {
             console.log(data)
             var dataAsJSON = xmlToJson(data);
-            
+
             var resultData = dataAsJSON.resultset.result
-        for (var i = 0; i < resultData.length; i++) {
-            console.log(resultData[i]['@attributes'])
-        }
-})}
+            for (var i = 0; i < resultData.length; i++) {
+                console.log(resultData[i]['@attributes'])
+            }
+        })
+}
 
 jQuery.ajaxPrefilter(function (options) {
     if (options.crossDomain && jQuery.support.cors) {
@@ -66,18 +67,24 @@ function xmlToJson(xml) {
     return obj;
 }
 
-    stateSelect.addEventListener('change', function () {
-        queryValue = stateSelect.options[stateSelect.selectedIndex].value
-        console.log(queryValue)
-        getCampgroundData(queryValue);
-    })
+//This makes the Modal work
+document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
+});
+
+stateSelect.addEventListener('change', function () {
+    queryValue = stateSelect.options[stateSelect.selectedIndex].value
+    console.log(queryValue)
+    getCampgroundData(queryValue);
+})
 
 
 
 
-    provinceSelect.addEventListener('change', function () {
-        queryValue = provinceSelect.options[provinceSelect.selectedIndex].value
-        console.log(queryValue)
-        getCampgroundData(queryValue);
+provinceSelect.addEventListener('change', function () {
+    queryValue = provinceSelect.options[provinceSelect.selectedIndex].value
+    console.log(queryValue)
+    getCampgroundData(queryValue);
 
-    })
+})
