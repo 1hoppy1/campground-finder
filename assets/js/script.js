@@ -1,10 +1,9 @@
 var stateSelect = document.getElementById("state-dropdown-menu");
-var provinceSelect = document.getElementById("province-dropdown-menu");
-var apiKey = "&api_key=afvahcy3rpqnc76atjxg4kjk";
+var apiKey = "&api_key=8PYNKmCCNOZNgeQnteDYJtKAQXejR1odSgowgYcn";
 var queryValue;
 //add function to grab campground api here...
 
-var queryURL = "https://api.amp.active.com/camping/campgrounds/?pstate=" 
+var queryURL = "https://developer.nps.gov/api/v1/campgrounds?stateCode=" 
 
 //add function to grab weather data here....
 function getCampgroundData (area) {
@@ -24,14 +23,4 @@ stateSelect.addEventListener('change', function () {
     getCampgroundData(queryValue);
     })
 
-
-
-
-provinceSelect.addEventListener('change', function () { 
-    console.log('change') 
-
-})
-
-
-
-
+//"https://developer.nps.gov/api/v1/campgrounds?stateCode=UT&api_key=8PYNKmCCNOZNgeQnteDYJtKAQXejR1odSgowgYcn"
