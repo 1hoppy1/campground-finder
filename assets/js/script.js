@@ -1,5 +1,6 @@
 var stateSelect = document.getElementById("state-dropdown-menu");
 var provinceSelect = document.getElementById("province-dropdown-menu");
+var modalBtn = document.getElementById('modal-btn');
 var apiKey = "&api_key=afvahcy3rpqnc76atjxg4kjk";
 var queryValue;
 //add function to grab campground api here...
@@ -79,12 +80,10 @@ stateSelect.addEventListener('change', function () {
     getCampgroundData(queryValue);
 })
 
-
-
-
 provinceSelect.addEventListener('change', function () {
     queryValue = provinceSelect.options[provinceSelect.selectedIndex].value
     console.log(queryValue)
     getCampgroundData(queryValue);
 
 })
+

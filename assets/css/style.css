@@ -2,6 +2,7 @@
 :root {
   background-image: url("../images/campfire.jfif");
   background-size: cover;
+  background-attachment: fixed;
 }
 
 .hero-text {
@@ -12,7 +13,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-
+  width: 75%;
 }
 
 h6 {
@@ -22,12 +23,12 @@ h6 {
 
 #state-dropdown-menu {
   display: inline-block;
-  width: 25%;
+  width: 50%;
 }
 
 #province-dropdown-menu {
   display: inline-block;
-  width: 25%;
+  width: 50%;
 }
 
 label {
@@ -35,16 +36,17 @@ label {
   color: white;
   padding: 10px;
 }
-/*
+
 .modal-checkbox-format {
   display: flex;
   flex-wrap: wrap;
 }
-*/
-/*.checkbox-format {
-  display: block
+
+.checkbox-format {
+  display: flex;
+  width:100%;
+  color:black;
 }
-*/
 
 form {
   display: flex;
