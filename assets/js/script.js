@@ -69,15 +69,22 @@ function xmlToJson(xml) {
 
 //This makes the Modal work
 document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems);
-});
+     var elems = document.querySelectorAll('.modal');
+     var instances = M.Modal.init(elems);
+ });
 
 stateSelect.addEventListener('change', function () {
     queryValue = stateSelect.options[stateSelect.selectedIndex].value
     console.log(queryValue)
     getCampgroundData(queryValue);
+    
+    // if (queryValue === true) {
+
+    // }
+   
 })
+
+
 
 
 
