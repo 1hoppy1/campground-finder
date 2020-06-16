@@ -18,10 +18,12 @@ function getCampgroundData(area) {
             var dataAsJSON = xmlToJson(data);
 
             var resultData = dataAsJSON.resultset.result
-            for (var i = 0; i < resultData.length; i++) {
-                console.log(resultData[i]['@attributes'])
-            }
+            campgroundCards(resultData)
         })
+}
+
+function campgroundCards(campgroundData) {
+ //create cards and append data to them here.....
 }
 
 jQuery.ajaxPrefilter(function (options) {
@@ -67,6 +69,8 @@ function xmlToJson(xml) {
     }
     return obj;
 }
+
+
 
 
 
