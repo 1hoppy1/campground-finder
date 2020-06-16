@@ -68,16 +68,18 @@ function xmlToJson(xml) {
     return obj;
 }
 
-//This makes the Modal work
-document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems);
-});
+
 
 stateSelect.addEventListener('change', function () {
     queryValue = stateSelect.options[stateSelect.selectedIndex].value
     console.log(queryValue)
     getCampgroundData(queryValue);
+    
+    //This opens the Modal after the user selects state or province
+    const elem = document.getElementById('modal1');
+    const instance = M.Modal.init(elem, {dismissible: false});
+    instance.open();
+   
 })
 
 provinceSelect.addEventListener('change', function () {
@@ -85,5 +87,9 @@ provinceSelect.addEventListener('change', function () {
     console.log(queryValue)
     getCampgroundData(queryValue);
 
-})
+//This opens the Modal after the user selects state or province
+const elem = document.getElementById('modal1');
+const instance = M.Modal.init(elem, {dismissible: false});
+instance.open();
 
+})
