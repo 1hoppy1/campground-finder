@@ -52,9 +52,9 @@ var queryURL = "https://cors-anywhere.herokuapp.com/http://api.amp.active.com/ca
 
 function getCampgroundData(area) {
     $.ajax({
-        type: "GET",
-        url: queryURL + area + apiKey
-    })
+            type: "GET",
+            url: queryURL + area + apiKey
+        })
         .then(function (data) {
 
             var dataAsJSON = xmlToJson(data);
@@ -132,6 +132,7 @@ function campgroundCards(campgroundData) {
         console.log("test:" + userSelection.resultData[0].attributes.facilityName)
 
     // }
+
 }
 
 jQuery.ajaxPrefilter(function (options) {
@@ -178,19 +179,25 @@ function xmlToJson(xml) {
     return obj;
 }
 
-
-
 stateSelect.addEventListener('change', function () {
     queryValue = stateSelect.options[stateSelect.selectedIndex].value
     console.log(queryValue)
     userSelection.selectedState = queryValue
     getCampgroundData(queryValue);
-    
-    //This opens the Modal after the user selects state or province
+
+    //This opens the Modal after the user selects state
     const elem = document.getElementById('modal1');
-    const instance = M.Modal.init(elem, {dismissible: false});
+    const instance = M.Modal.init(elem, {
+        dismissible: false
+    });
     instance.open();
+
+    //This is a small part of the persistance storage function
+    localStorage.setItem("state", stateSelect.value);
+    $('#province-dropdown-menu').val("");
+    localStorage.removeItem("province");
 });
+
 
 provinceSelect.addEventListener('change', function () {
     queryValue = provinceSelect.options[provinceSelect.selectedIndex].value
@@ -198,10 +205,42 @@ provinceSelect.addEventListener('change', function () {
     userSelection.selectedProvince = queryValue
     getCampgroundData(queryValue);
 
-    //This opens the Modal after the user selects state or province
+    //This opens the Modal after the user selects province
     const elem = document.getElementById('modal1');
-    const instance = M.Modal.init(elem, {dismissible: false});
+    const instance = M.Modal.init(elem, {
+        dismissible: false
+    });
     instance.open();
+
+    //This is a small part of the persistance storage function
+    localStorage.setItem("province", provinceSelect.value);
+    $('#state-dropdown-menu').val("");
+    localStorage.removeItem("state");
+})
+
+//This is the majority of the persistance storage function
+window.onload = function () {
+    var state = localStorage.getItem("state");
+    $('#state-dropdown-menu').val(state);
+    var province = localStorage.getItem("province");
+    $('#province-dropdown-menu').val(province);
+
+    if (state = true) {
+        queryValue = stateSelect.options[stateSelect.selectedIndex].value
+        getCampgroundData(queryValue);
+    }
+    if (province = true) {
+        queryValue = provinceSelect.options[provinceSelect.selectedIndex].value
+        getCampgroundData(queryValue);
+    }
+}
+$('#state-dropdown-menu').change(function () {
+    var stateValue = $(this).val();
+    localStorage.setItem("state", stateValue);
+});
+$('#province-dropdown-menu').change(function () {
+    var provinceValue = $(this).val();
+    localStorage.setItem("province", provinceValue);
 });
 
 modalBtn.addEventListener('click', modalBtnHandler);
