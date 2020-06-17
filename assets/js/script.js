@@ -51,23 +51,23 @@ function getCampgroundData(area) {
         url: queryURL + area + apiKey
     })
         .then(function (data) {
+
             var dataAsJSON = xmlToJson(data);
             var resultData = dataAsJSON.resultset.result
-            filterData(resultData);
+            campgroundCards(resultData);
             console.log(resultData);
         })
-}
+};
 
 function filterData (resultData){
     campgroundCards(resultData);
-}
+};
 function modalBtnHandler(){
     campgroundCards();
-}
+};
  //create cards and append data to them here.....
 function campgroundCards(campgroundData) {
-    for(var i=0; i<20;i++){
-    // campgroundData.forEach((result, [i])=>{
+    // for(var i=0; i<20;i++){
         // campName = campgroundData.facilityName;
         console.log(campgroundData);
         const card = document.createElement('div');
@@ -94,7 +94,8 @@ function campgroundCards(campgroundData) {
 
         //append new card to container
         campgroundCardEl.innerHTML = cardContent;
-    };
+
+    // }
 }
 
 jQuery.ajaxPrefilter(function (options) {
