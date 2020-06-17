@@ -14,16 +14,19 @@ function getCampgroundData(area) {
         url: queryURL + area + apiKey
     })
         .then(function (data) {
-            console.log(data)
+
             var dataAsJSON = xmlToJson(data);
 
             var resultData = dataAsJSON.resultset.result
+            console.log(resultData)
             campgroundCards(resultData)
         })
 }
 
 function campgroundCards(campgroundData) {
+
  //create cards and append data to them here.....
+
 }
 
 jQuery.ajaxPrefilter(function (options) {
