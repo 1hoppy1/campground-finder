@@ -3,6 +3,7 @@ var provinceSelect = document.getElementById("province-dropdown-menu");
 var modalBtn = document.getElementById('modal-btn');
 var apiKey = "&api_key=afvahcy3rpqnc76atjxg4kjk";
 var queryValue;
+
 //add function to grab campground api here...
 
 var queryURL = "https://cors-anywhere.herokuapp.com/http://api.amp.active.com/camping/campgrounds/?pstate="
@@ -10,20 +11,23 @@ var queryURL = "https://cors-anywhere.herokuapp.com/http://api.amp.active.com/ca
 //add function to grab weather data here....
 function getCampgroundData(area) {
     $.ajax({
-        type: "GET",
-        url: queryURL + area + apiKey
-    })
+            type: "GET",
+            url: queryURL + area + apiKey
+        })
         .then(function (data) {
-            console.log(data)
+
             var dataAsJSON = xmlToJson(data);
 
             var resultData = dataAsJSON.resultset.result
+            console.log(resultData)
             campgroundCards(resultData)
         })
 }
 
 function campgroundCards(campgroundData) {
- //create cards and append data to them here.....
+
+    //create cards and append data to them here.....
+
 }
 
 jQuery.ajaxPrefilter(function (options) {
@@ -70,20 +74,22 @@ function xmlToJson(xml) {
     return obj;
 }
 
-
-
-
-
 stateSelect.addEventListener('change', function () {
     queryValue = stateSelect.options[stateSelect.selectedIndex].value
     console.log(queryValue)
     getCampgroundData(queryValue);
-    
-    //This opens the Modal after the user selects state or province
+
+    //This opens the Modal after the user selects state
     const elem = document.getElementById('modal1');
-    const instance = M.Modal.init(elem, {dismissible: false});
+    const instance = M.Modal.init(elem, {
+        dismissible: false
+    });
     instance.open();
-   
+
+    //This is a small part of the persistance storage function
+    localStorage.setItem("state", stateSelect.value);
+    $('#province-dropdown-menu').val("");
+    localStorage.removeItem("province");
 })
 
 provinceSelect.addEventListener('change', function () {
@@ -91,9 +97,40 @@ provinceSelect.addEventListener('change', function () {
     console.log(queryValue)
     getCampgroundData(queryValue);
 
-//This opens the Modal after the user selects state or province
-const elem = document.getElementById('modal1');
-const instance = M.Modal.init(elem, {dismissible: false});
-instance.open();
+    //This opens the Modal after the user selects province
+    const elem = document.getElementById('modal1');
+    const instance = M.Modal.init(elem, {
+        dismissible: false
+    });
+    instance.open();
 
+    //This is a small part of the persistance storage function
+    localStorage.setItem("province", provinceSelect.value);
+    $('#state-dropdown-menu').val("");
+    localStorage.removeItem("state");
 })
+
+//This is the majority of the persistance storage function
+window.onload = function () {
+    var state = localStorage.getItem("state");
+    $('#state-dropdown-menu').val(state);
+    var province = localStorage.getItem("province");
+    $('#province-dropdown-menu').val(province);
+
+    if (state = true) {
+        queryValue = stateSelect.options[stateSelect.selectedIndex].value
+        getCampgroundData(queryValue);
+    }
+    if (province = true) {
+        queryValue = provinceSelect.options[provinceSelect.selectedIndex].value
+        getCampgroundData(queryValue);
+    }
+}
+$('#state-dropdown-menu').change(function () {
+    var stateValue = $(this).val();
+    localStorage.setItem("state", stateValue);
+});
+$('#province-dropdown-menu').change(function () {
+    var provinceValue = $(this).val();
+    localStorage.setItem("province", provinceValue);
+});
