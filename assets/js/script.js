@@ -4,6 +4,11 @@ var modalBtn = document.getElementById('modal-btn');
 var campgroundCardEl = document.getElementById("campground-card-el");
 var apiKey = "&api_key=afvahcy3rpqnc76atjxg4kjk";
 var queryValue;
+var userSelection = {
+    selectedState:"",
+    selectedProvince:"",
+    selectedAmeneties:{},
+};
 //add function to grab campground api here...
 
 var queryURL = "https://cors-anywhere.herokuapp.com/http://api.amp.active.com/camping/campgrounds/?pstate="
@@ -54,8 +59,9 @@ function getCampgroundData(area) {
 
             var dataAsJSON = xmlToJson(data);
             var resultData = dataAsJSON.resultset.result
-            campgroundCards(resultData);
-            console.log(resultData);
+            // campgroundCards(resultData);
+            userSelection.resultData = resultData
+            console.log(userSelection.resultData);
         })
 };
 
@@ -63,8 +69,36 @@ function filterData (resultData){
     campgroundCards(resultData);
 };
 function modalBtnHandler(){
-    campgroundCards();
+
+    const {selectedAmeneties} = userSelection;
+
+    selectedAmeneties.campPets = document.getElementById("sitesWithPetsAllowed").value;
+    selectedAmeneties.campSewer = document.getElementById("sitesWithSewerHookup").value;
+    selectedAmeneties.campWater = document.getElementById("sitesWithWaterHookup").value;
+    selectedAmeneties.campWaterFront = document.getElementById("sitesWithWaterfront").value;
+
+    selectedAmeneties.campPetsCheck = document.getElementById("sitesWithPetsAllowed").checked;
+    selectedAmeneties.campSewerCheck = document.getElementById("sitesWithSewerHookup").checked;
+    selectedAmeneties.campWaterCheck = document.getElementById("sitesWithWaterHookup").checked;
+    selectedAmeneties.campWaterFrontCheck = document.getElementById("sitesWithWaterfront").checked;
+    console.log(selectedAmeneties.campPetsCheck)
+    console.log(selectedAmeneties.campSewerCheck)
+    
+    if (selectedAmeneties.campPetsCheck){
+        filterData(selectedAmeneties.campPets);
+    }
+    if (selectedAmeneties.campSewerCheck){
+        filterData(selectedAmeneties.campSewer);
+    }
+    if (selectedAmeneties.campWaterCheck){
+        filterData(selectedAmeneties.campWater);
+    }
+    if (selectedAmeneties.campWaterFrontCheck){
+        filterData(selectedAmeneties.campWaterFront);
+    }
+ 
 };
+
  //create cards and append data to them here.....
 function campgroundCards(campgroundData) {
     // for(var i=0; i<20;i++){
@@ -76,12 +110,12 @@ function campgroundCards(campgroundData) {
         //construct card content
         const cardContent = `
         <div class="row">
-            <div class="card small col s6 m3">
+            <div class="card small col s6 m2">
                 <div class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="./assets/images/campfire.jfif">
                 </div>
-                <div class="card-content" id="[i]+card-content">
-                    <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                <div class="card-content" id="card-content">
+                    <span id="card-title" class="card-title activator grey-text text-darken-4"><i class="material-icons right">more_vert</i></span>
                     <p><a href="#">Current Weather</a></p>
                 </div>
                 <div class="card-reveal">
@@ -94,6 +128,8 @@ function campgroundCards(campgroundData) {
 
         //append new card to container
         campgroundCardEl.innerHTML = cardContent;
+        // document.getElementById("card-title").innerHTML = userSelection.resultData[0].attributes.facilityName;
+        console.log("test:" + userSelection.resultData[0].attributes.facilityName)
 
     // }
 }
@@ -147,6 +183,7 @@ function xmlToJson(xml) {
 stateSelect.addEventListener('change', function () {
     queryValue = stateSelect.options[stateSelect.selectedIndex].value
     console.log(queryValue)
+    userSelection.selectedState = queryValue
     getCampgroundData(queryValue);
     
     //This opens the Modal after the user selects state or province
@@ -158,6 +195,7 @@ stateSelect.addEventListener('change', function () {
 provinceSelect.addEventListener('change', function () {
     queryValue = provinceSelect.options[provinceSelect.selectedIndex].value
     console.log(queryValue)
+    userSelection.selectedProvince = queryValue
     getCampgroundData(queryValue);
 
     //This opens the Modal after the user selects state or province
