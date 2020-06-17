@@ -218,29 +218,29 @@ provinceSelect.addEventListener('change', function () {
     localStorage.removeItem("state");
 })
 
-//This is the majority of the persistance storage function
-window.onload = function () {
-    var state = localStorage.getItem("state");
-    $('#state-dropdown-menu').val(state);
-    var province = localStorage.getItem("province");
-    $('#province-dropdown-menu').val(province);
+// //This is the majority of the persistance storage function
+// window.onload = function () {
+//     var state = localStorage.getItem("state");
+//     $('#state-dropdown-menu').val(state);
+//     var province = localStorage.getItem("province");
+//     $('#province-dropdown-menu').val(province);
 
-    if (state = true) {
-        queryValue = stateSelect.options[stateSelect.selectedIndex].value
-        getCampgroundData(queryValue);
-    }
-    if (province = true) {
-        queryValue = provinceSelect.options[provinceSelect.selectedIndex].value
-        getCampgroundData(queryValue);
-    }
-}
-$('#state-dropdown-menu').change(function () {
-    var stateValue = $(this).val();
-    localStorage.setItem("state", stateValue);
-});
-$('#province-dropdown-menu').change(function () {
-    var provinceValue = $(this).val();
-    localStorage.setItem("province", provinceValue);
-});
+//     if (state = true) {
+//         queryValue = stateSelect.options[stateSelect.selectedIndex].value
+//         getCampgroundData(queryValue);
+//     }
+//     if (province = true) {
+//         queryValue = provinceSelect.options[provinceSelect.selectedIndex].value
+//         getCampgroundData(queryValue);
+//     }
+// }
+// $('#state-dropdown-menu').change(function () {
+//     var stateValue = $(this).val();
+//     localStorage.setItem("state", stateValue);
+// });
+// $('#province-dropdown-menu').change(function () {
+//     var provinceValue = $(this).val();
+//     localStorage.setItem("province", provinceValue);
+// });
 
 modalBtn.addEventListener('click', modalBtnHandler);
