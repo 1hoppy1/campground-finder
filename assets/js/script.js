@@ -25,31 +25,6 @@ var queryURL = "https://cors-anywhere.herokuapp.com/http://api.amp.active.com/ca
 //     });
 // };
 
-// var displayWeather = function(weather, coord){
-//     weatherContainerEl.textContent ="";
-//     weatherSearchTerm.textContent = coord;
-//     weatherIcon = weather.weather[0].icon;
-//     var weatherIconImg = document.createElement("img");
-//     weatherIconImg.src = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
-//     weatherSearchTerm.appendChild(weatherIconImg);
-    
-
-//     var weatherTemp = weather.main.temp;
-//     var weatherType = weather.weather.description;
-
-//     console.log(weather);
-//     // console.log(inputCity);
-
-//     var weatherContainerTemp = document.createElement('P');
-//         weatherContainerTemp.innerHTML = "Temperature: " + weatherTemp;
-//         weatherContainerEl.appendChild(weatherContainerTemp);
-
-//     var weatherType = document.createElement('P');
-//         weatherType.innerHTML = "Currently: " + weatherTemp;
-//         weatherContainerEl.appendChild(weatherType);
-
-// };
-
 function getCampgroundData(area) {
     $.ajax({
             type: "GET",
@@ -109,9 +84,9 @@ function campgroundCards(campgroundData) {
 
         //construct card content
         const cardContent = `
-        <div class="row">
-            <div class="card small col s6 m2">
-                <div class="card-image waves-effect waves-block waves-light">
+        <div class="small col s6 m3">
+            <div class="card">
+                <div id="card-img" class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="./assets/images/campfire.jfif">
                 </div>
                 <div class="card-content" id="card-content">
@@ -128,11 +103,47 @@ function campgroundCards(campgroundData) {
 
         //append new card to container
         campgroundCardEl.innerHTML = cardContent;
-        // document.getElementById("card-title").innerHTML = userSelection.resultData[0].attributes.facilityName;
-        console.log("test:" + userSelection.resultData[0].attributes.facilityName)
+
+        document.getElementById("card-title").innerHTML = userSelection.resultData[0]["@attributes"].facilityName;
+
+        var cardImg = document.createElement("img");
+            cardImg.setAttribute("class", "activator");
+            var cardImgEndPoint = userSelection.resultData[0]["@attributes"].facilityPhoto;
+            cardImg.src = "https://cors-anywhere.herokuapp.com" + cardImgEndPoint;
+            var cardImgDiv = document.getElementById("card-img");
+            cardImgDiv.appendChild(cardImg);
+
+        var campLat = userSelection.resultData[0]["@attributes"].latitude;
+        var camplon = userSelection.resultData[0]["@attributes"].longitude;
+
+
+// var displayWeather = function(weather, coord){
+//     weatherContainerEl.textContent ="";
+//     weatherSearchTerm.textContent = coord;
+//     weatherIcon = weather.weather[0].icon;
+//     var weatherIconImg = document.createElement("img");
+//     weatherIconImg.src = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+//     weatherSearchTerm.appendChild(weatherIconImg);
+    
+
+//     var weatherTemp = weather.main.temp;
+//     var weatherType = weather.weather.description;
+
+//     console.log(weather);
+//     // console.log(inputCity);
+
+//     var weatherContainerTemp = document.createElement('P');
+//         weatherContainerTemp.innerHTML = "Temperature: " + weatherTemp;
+//         weatherContainerEl.appendChild(weatherContainerTemp);
+
+//     var weatherType = document.createElement('P');
+//         weatherType.innerHTML = "Currently: " + weatherTemp;
+//         weatherContainerEl.appendChild(weatherType);
+
+// };
+
 
     // }
-
 }
 
 jQuery.ajaxPrefilter(function (options) {
