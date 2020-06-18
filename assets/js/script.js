@@ -83,9 +83,9 @@ stateSelect.addEventListener('change', function () {
     getCampgroundData(queryValue);
     
     //This opens the Modal after the user selects state or province
-    const elem = document.getElementById('modal1');
-    const instance = M.Modal.init(elem, {dismissible: false});
-    instance.open();
+    // const elem = document.getElementById('modal1');
+    // const instance = M.Modal.init(elem, {dismissible: false});
+    // instance.open();
    
 })
 
@@ -95,8 +95,8 @@ provinceSelect.addEventListener('change', function () {
     getCampgroundData(queryValue);
 
 //This opens the Modal after the user selects state or province
-const elem = document.getElementById('modal1');
-const instance = M.Modal.init(elem, {dismissible: false});
-instance.open();
+// const elem = document.getElementById('modal1');
+// const instance = M.Modal.init(elem, {dismissible: false});
+// instance.open();
 
 })
