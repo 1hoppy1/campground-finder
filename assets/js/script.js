@@ -4,6 +4,9 @@ var modalBtn = document.getElementById('modal-btn');
 var campgroundCardEl = document.getElementById("campground-card-el");
 var apiKey = "&api_key=afvahcy3rpqnc76atjxg4kjk";
 var queryValue;
+var weatherIcon = document.getElementById("weather-icon");
+var weatherCardTemp = document.getElementById("weather-temp");
+var weatherCardCondition = document.getElementById("weather-cond")
 var userSelection = {
     selectedState:"",
     selectedProvince:"",
@@ -15,15 +18,32 @@ var queryURL = "https://cors-anywhere.herokuapp.com/http://api.amp.active.com/ca
 
 //add function to grab weather data here....
 
-// var currentWeather = function(location){
-//     var currentWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&units=imperial&appid=803fa34dbd4909977dd765eb002a2987";
-//     fetch(currentWeatherAPI).then(function(response){
-//         response.json().then(function(data){
-//             displayWeather(data, location)
-//             // console.log(data);
-//         })
-//     });
-// };
+var currentWeather = function(location){
+    var currentWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=lat="+ userSelection.campLat + "&lon=" + userSelection.campLon + "&units=imperial&appid=a6fe42d269d6db96181cb890742e1fc3";
+    fetch(currentWeatherAPI).then(function(response){
+        response.json().then(function(data){
+            displayWeather(data, location)
+            console.log(data);
+        })
+    });
+};
+
+var displayWeather = function(weather){
+    weatherIcon = weather.weather[0].icon;
+    var weatherIconImg = document.createElement("img");
+    weatherIconImg.src = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+    weatherIcon.appendChild(weatherIconImg);
+    
+    var weatherTemp = weather.main.temp;
+    var weatherType = weather.weather.description;
+
+    console.log(weather);
+
+    weatherCardTemp.innerHTML = "Temperature: " + weatherTemp;
+    weatherCardCondition.innerHTML = "Currently: " + weatherType;
+
+
+};
 
 function getCampgroundData(area) {
     $.ajax({
@@ -47,11 +67,13 @@ function modalBtnHandler(){
 
     const {selectedAmeneties} = userSelection;
 
+    selectedAmeneties.campPower = document.getElementById("sitesWithAmps").value;
     selectedAmeneties.campPets = document.getElementById("sitesWithPetsAllowed").value;
     selectedAmeneties.campSewer = document.getElementById("sitesWithSewerHookup").value;
     selectedAmeneties.campWater = document.getElementById("sitesWithWaterHookup").value;
     selectedAmeneties.campWaterFront = document.getElementById("sitesWithWaterfront").value;
 
+    selectedAmeneties.campPowerCheck = document.getElementById("sitesWithAmps").checked;
     selectedAmeneties.campPetsCheck = document.getElementById("sitesWithPetsAllowed").checked;
     selectedAmeneties.campSewerCheck = document.getElementById("sitesWithSewerHookup").checked;
     selectedAmeneties.campWaterCheck = document.getElementById("sitesWithWaterHookup").checked;
@@ -59,6 +81,9 @@ function modalBtnHandler(){
     console.log(selectedAmeneties.campPetsCheck)
     console.log(selectedAmeneties.campSewerCheck)
     
+    if (selectedAmeneties.campPowerCheck){
+        filterData(selectedAmeneties.campPower);
+    }
     if (selectedAmeneties.campPetsCheck){
         filterData(selectedAmeneties.campPets);
     }
@@ -71,7 +96,9 @@ function modalBtnHandler(){
     if (selectedAmeneties.campWaterFrontCheck){
         filterData(selectedAmeneties.campWaterFront);
     }
- 
+    else{
+        campgroundCards();
+    }
 };
 
  //create cards and append data to them here.....
@@ -87,15 +114,17 @@ function campgroundCards(campgroundData) {
         <div class="small col s6 m3">
             <div class="card">
                 <div id="card-img" class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="./assets/images/campfire.jfif">
+                    <img class="activator" src="./assets/images/morning camp.jpg">
                 </div>
                 <div class="card-content" id="card-content">
                     <span id="card-title" class="card-title activator grey-text text-darken-4"><i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">Current Weather</a></p>
+                    <p>Click Image for Weather</p>
                 </div>
                 <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    <span class="card-title grey-text text-darken-4">Current Weather<i class="material-icons right">close</i></span>
+                    <div id ="weather-icon">Icon</div>
+                    <div id ="weather-cond">condition</div>
+                    <div id ="weather-temp">temp</div>
                 </div>
             </div>
         </div>
@@ -103,46 +132,20 @@ function campgroundCards(campgroundData) {
 
         //append new card to container
         campgroundCardEl.innerHTML = cardContent;
-
         document.getElementById("card-title").innerHTML = userSelection.resultData[0]["@attributes"].facilityName;
 
-        var cardImg = document.createElement("img");
-            cardImg.setAttribute("class", "activator");
-            var cardImgEndPoint = userSelection.resultData[0]["@attributes"].facilityPhoto;
-            cardImg.src = "https://cors-anywhere.herokuapp.com" + cardImgEndPoint;
-            var cardImgDiv = document.getElementById("card-img");
-            cardImgDiv.appendChild(cardImg);
+// add image to card
+        // var cardImg = document.createElement("img");
+        //     cardImg.setAttribute("class", "activator");
+        //     var cardImgEndPoint = userSelection.resultData[0]["@attributes"].facilityPhoto;
+        //     cardImg.src = "https://cors-anywhere.herokuapp.com" + cardImgEndPoint;
+        //     var cardImgDiv = document.getElementById("card-img");
+        //     cardImgDiv.appendChild(cardImg);
 
-        var campLat = userSelection.resultData[0]["@attributes"].latitude;
-        var camplon = userSelection.resultData[0]["@attributes"].longitude;
-
-
-// var displayWeather = function(weather, coord){
-//     weatherContainerEl.textContent ="";
-//     weatherSearchTerm.textContent = coord;
-//     weatherIcon = weather.weather[0].icon;
-//     var weatherIconImg = document.createElement("img");
-//     weatherIconImg.src = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
-//     weatherSearchTerm.appendChild(weatherIconImg);
-    
-
-//     var weatherTemp = weather.main.temp;
-//     var weatherType = weather.weather.description;
-
-//     console.log(weather);
-//     // console.log(inputCity);
-
-//     var weatherContainerTemp = document.createElement('P');
-//         weatherContainerTemp.innerHTML = "Temperature: " + weatherTemp;
-//         weatherContainerEl.appendChild(weatherContainerTemp);
-
-//     var weatherType = document.createElement('P');
-//         weatherType.innerHTML = "Currently: " + weatherTemp;
-//         weatherContainerEl.appendChild(weatherType);
-
-// };
-
-
+        //access coordinates from camp API and store it to use for weather
+        userSelection.campLat = userSelection.resultData[0]["@attributes"].latitude;
+        userSelection.campLon = userSelection.resultData[0]["@attributes"].longitude;
+        currentWeather();
     // }
 }
 
