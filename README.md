@@ -15,7 +15,7 @@
 
 USER STORY:
 
-As a user, I want an application to be able to search for existing campgrounds.  I want to be able to search and state in the United States as well as any province in Canada (just in case I want to camp anywhere in canada...).  Given my input, I am shown existing campgrounds.  I also want to be able to see current weather in the area of each campground to better influence my decision on a campground.  
+As a user, I want an application to be able to search for existing campgrounds. So that I will be able to search any state in the United States as well as any province in Canada (just in case I want to camp anywhere in canada...).  Given my input, I want to see existing campgrounds.  I also want to be able to see current weather in the area of each campground to better influence my decision on a campground.  
 
 MOTIVATION FOR DEVELOPMENT:
 
