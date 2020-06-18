@@ -13,13 +13,13 @@
 </head>
 
 <body>
-  <main>
+  <main class="">
   <!--  Start Hero  -->
-    <div class="row hero-text">
-        <h1>Where do you want to camp?</h1>
-        <h6>Please select a State or Province.</h6>
-        <div class = 'col s12'>
-        <div class = 'col s12 m6'>
+  <div class="row center-align hero-text">
+    <h1>Where do you want to camp?</h1>
+    <h6>Please select a State or Province.</h6>
+    <div class='col s12'>
+      <div class='col s12 m6'>
         <label for="States">Choose a State:</label>
           <select name="states" id="state-dropdown-menu">
             <option value="">Select State</option>
@@ -98,13 +98,10 @@
         </div>
 
     </div>
+</main>
     <!--  End Hero  -->
 
-  <!--
-   Modal Trigger 
-  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-  -->
-  
+
   <!-- Modal Structure -->
   <div id="modal1" class="modal modal-fixed-footer">
     <div class="modal-content">
@@ -128,7 +125,7 @@
         <div>
           <p>
             <label>
-              <input id="sitesWithPetsAllowed" type="checkbox" />
+              <input id="sitesWithPetsAllowed" value="sitesWithPetsAllowed" type="checkbox" />
               <span>
                 <p>Pets Allowed</p>
               </span>
@@ -139,7 +136,7 @@
         <div>
           <p>
             <label>
-              <input id="sitesWithSewerHookup" type="checkbox" />
+              <input id="sitesWithSewerHookup" value="sitesWithSewerHookup" type="checkbox" />
               <span>
                 <p>Sewer Hookup</p>
               </span>
@@ -150,7 +147,7 @@
         <div>
           <p>
             <label>
-              <input id="sitesWithWaterHookup" type="checkbox" />
+              <input id="sitesWithWaterHookup" value="sitesWithWaterHookup" type="checkbox" />
               <span>
                 <p>Water Hookup</p>
               </span>
@@ -161,7 +158,7 @@
         <div>
           <p>
             <label>
-              <input id="sitesWithWaterfront" type="checkbox" />
+              <input id="sitesWithWaterfront" value="sitesWithWaterFront" type="checkbox" />
               <span>
                 <p>Waterfront Campsites</p>
               </span>
@@ -178,17 +175,17 @@
     
     <!--campground cards-->
 
-</main>
-<div id="campground-card-el"></div>
+</div>
+<div class ='camp-card row' id="campground-card-el"></div>
 
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <!-- Link to jquery js if we want it -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <!-- Link to materialize js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="./assets/js/script.js"></script>
-  <script src="./assets/js/keys.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Link to materialize js -->
+<!-- Link to jquery js if we want it -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="./assets/js/script.js"></script>
+<script src="./assets/js/keys.js"></script>
 
 </body>
 

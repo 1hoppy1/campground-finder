@@ -6,12 +6,6 @@
 }
 
 .hero-text {
-
-  text-align: center;
-  position: absolute;
-  top: 23%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   color: white;
   width: 75%;
 }
@@ -55,4 +49,8 @@ p, label {
 
 .yellow {
   background-color: yellow;
+}
+
+.camp-card{
+  display: block;
 }
