@@ -31,10 +31,6 @@ function getCampgroundData(area) {
         })
 };
 
-function filterData(resultData) {
-    campgroundCards(resultData);
-};
-
 function modalBtnHandler() {
 
     const { selectedAmeneties } = userSelection;
@@ -54,19 +50,19 @@ function modalBtnHandler() {
     console.log(selectedAmeneties.campPets)
 
     if (selectedAmeneties.campPowerCheck) {
-        filterData(selectedAmeneties.campPower);
+        campgroundCards(selectedAmeneties.campPower);
     }
     if (selectedAmeneties.campPetsCheck) {
-        filterData(selectedAmeneties.campPets);
+        campgroundCards(selectedAmeneties.campPets);
     }
     if (selectedAmeneties.campSewerCheck) {
-        filterData(selectedAmeneties.campSewer);
+        campgroundCards(selectedAmeneties.campSewer);
     }
     if (selectedAmeneties.campWaterCheck) {
-        filterData(selectedAmeneties.campWater);
+        campgroundCards(selectedAmeneties.campWater);
     }
     if (selectedAmeneties.campWaterFrontCheck) {
-        filterData(selectedAmeneties.campWaterFront);
+        campgroundCards(selectedAmeneties.campWaterFront);
     }
     if ((!selectedAmeneties.campPowerCheck) && 
         (!selectedAmeneties.campPetsCheck) && 
@@ -89,13 +85,13 @@ function campgroundCards(campgroundData) {
         const cardContent = document.createElement('div');
         cardContent.classList = "small col s6 m3"
         cardContent.innerHTML =
-            `<div class="card">
+            `<div class="card small">
                 <div id="card-img" class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="./assets/images/morning camp.jpg">
                 </div>
                 <div class="card-content" id="card-content">
-                    <span id="card-title" class="card-title activator grey-text text-darken-4">${userSelection.resultData[i]["@attributes"].facilityName}<i class="material-icons right">more_vert</i></span>
-                    <p>Click Image for Weather</p>
+                    <span id="card-title" class="card-title activator grey-text text-darken-4">${userSelection.resultData[i]["@attributes"].facilityName}</span>
+                    <p></p>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">Current Weather<i class="material-icons right">close</i></span>
@@ -104,18 +100,7 @@ function campgroundCards(campgroundData) {
                     <div id ="weather-temp">temp</div>
                 </div>
             </div>`;
-
-        //append new card to container
-        campgroundCardEl.append(cardContent);
-        // document.getElementById("card-title").append = userSelection.resultData[i]["@attributes"].facilityName;
-
-        // add image to card
-        //  var cardImg = document.createElement("img");
-        //      cardImg.setAttribute("class", "activator");
-        //      var cardImgEndPoint = userSelection.resultData[0]["@attributes"].facilityPhoto;
-        //      cardImg.src = "https://cors-anywhere.herokuapp.com/http://api.amp.active.com/camping/campgrounds/?pstate=" + cardImgEndPoint;
-        //     var cardImgDiv = document.getElementById("card-img");
-        //     cardImgDiv.appendChild(cardImg);
+            campgroundCardEl.append(cardContent);
 
         //access coordinates from camp API and store it to use for weather
         // userSelection.campLat = userSelection.resultData[0]["@attributes"].latitude;
