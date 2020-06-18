@@ -38,11 +38,9 @@ We programmed the JS to fire upon a change in the dropdown so that the user does
 
 Upon selection of a state or province, cards are generated that show the results of campgrounds in the selected area.  The name of the campground is displayed as well as an image of the campground (if available throught the api).  Current weather is then displayed through another api call.  
 
-<img src="/assets/images/Screenshot%20().png" />
+<img src="/assets/images/Screenshot%20(55).png" />
 
 Local storage is then used to store the last search so if the screen is refreshed the last search is not lost.
-
-<img src="/assets/images/Screenshot%20().png" />
   
 The two api's that were used for this project can be found at:
 <ul>
