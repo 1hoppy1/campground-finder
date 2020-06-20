@@ -221,7 +221,7 @@ provinceSelect.addEventListener('change', function () {
     localStorage.removeItem("state");
 })
 
-// //This is the majority of the persistance storage function
+ //This is the majority of the persistance storage function
  window.onload = function () {
      var state = localStorage.getItem("state");
      $('#state-dropdown-menu').val(state);
@@ -245,7 +245,7 @@ provinceSelect.addEventListener('change', function () {
  });
  $('#province-dropdown-menu').change(function () {
      var provinceValue = $(this).val();
-     localStorage.setItem("province", provinceValue);
+    localStorage.setItem("province", provinceValue);
  });
 
 modalBtn.addEventListener('click', modalBtnHandler);
