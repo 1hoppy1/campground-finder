@@ -39,14 +39,13 @@ We programmed the JS to fire upon a change in the dropdown so that the user does
 Upon selection of a state or province, cards are generated that show the results of campgrounds in the selected area.  The name of the campground is displayed as well as an image of the campground (if available throught the api).  Current weather is then displayed through another api call.  
 
 <img src="/assets/images/Screenshot%20(55).png" />
+<img src="/assets/images/Screenshot%20(57).png" />
 
 Local storage is then used to store the last search so if the screen is refreshed the last search is not lost.
 
 FUTURE DEVELOPMENT:
 
-The cards provide a space for an image, the api did return facility photos for some of the campgrounds but not all of them. So we opted not to use them, instead we chose a generic image for all.  Future development would include changes to make the photos faciity specific. 
-
-We wanted to use a weather api to include weather data for each location, but unfortunately this turned out to be very difficult.  We tried using latitude and longitude for the weather data but the api would only return data if the coordinates were within a city limit.  As most of the compgrounds were not listed in a specific city, this function broke.  Most likely a different api would need to be used or the data would need to be converted to a zip code and then return data for that zip code and not a specific geographical point.
+The cards provide a space for an image, the api did return facility photos for some of the campgrounds but not all of them. So we opted not to use them, instead we chose a generic image for all.  Future development would include changes to make the photos facility specific. 
   
 The two api's that were used for this project can be found at:
 <ul>
@@ -56,7 +55,7 @@ The two api's that were used for this project can be found at:
 
 Link to deployed application:
 
- https://sgtratchet.github.io/campground-finder/
+https://sgtratchet.github.io/campground-finder/
 
 Link to Github Repository:
 
