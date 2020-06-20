@@ -106,7 +106,7 @@ function campgroundCards(campgroundData) {
                         </div>
                         <div class="card-content" id="card-content">
                             <span id="card-title" class="card-title activator grey-text text-darken-4">${userSelection.resultData[campsiteDataIndex]["@attributes"].facilityName}</span>
-                            <p></p>
+                            <p>Click the image for weather!</p>
                         </div>
                         <div class="card-reveal">
                             <span class="card-title grey-text text-darken-4">Current Weather<i class="material-icons right">close</i></span>
