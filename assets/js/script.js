@@ -17,9 +17,9 @@ var userSelection = {
 
 
 function getCampgroundData(area) {
-console.log(area)
-    
-var queryURL = "https://www.reserveamerica.com/campgroundSearch.do?pstate="+area+"&xml=true&expwith=1&expfits=1"
+    console.log(area)
+
+    var queryURL = "https://cors-anywhere.herokuapp.com/http://api.amp.active.com/camping/campgrounds/?pstate="
     $.ajax({
         type: "GET",
         url: queryURL + area + apiKey
@@ -28,7 +28,7 @@ var queryURL = "https://www.reserveamerica.com/campgroundSearch.do?pstate="+area
 
             var dataAsJSON = xmlToJson(data);
             var resultData = dataAsJSON.resultset.result
-            // campgroundCards(resultData);
+
             userSelection.resultData = resultData
             console.log(userSelection.resultData);
         })
@@ -67,10 +67,10 @@ function modalBtnHandler() {
     if (selectedAmeneties.campWaterFrontCheck) {
         campgroundCards(selectedAmeneties.campWaterFront);
     }
-    if ((!selectedAmeneties.campPowerCheck) && 
-        (!selectedAmeneties.campPetsCheck) && 
-        (!selectedAmeneties.campSewerCheck) && 
-        (!selectedAmeneties.campWaterCheck) && 
+    if ((!selectedAmeneties.campPowerCheck) &&
+        (!selectedAmeneties.campPetsCheck) &&
+        (!selectedAmeneties.campSewerCheck) &&
+        (!selectedAmeneties.campWaterCheck) &&
         (!selectedAmeneties.campWaterFrontCheck)) {
         campgroundCards(userSelection.resultData);
     }
@@ -81,26 +81,26 @@ function campgroundCards(campgroundData) {
     console.log(userSelection.resultData, "campground data")
     campgroundCardEl.textContent = ""
 
-    
+
     for (var i = 0; i < 20; i++) {
         //campName = campgroundData.facilityName;
-        console.log("https://api.openweathermap.org/data/2.5/weather?lat="+ userSelection.resultData[i]["@attributes"].latitude + "&lon=" + userSelection.resultData[i]["@attributes"].longitude + "&units=imperial&appid="+keys.OPENWEATHER)
+        console.log("https://api.openweathermap.org/data/2.5/weather?lat=" + userSelection.resultData[i]["@attributes"].latitude + "&lon=" + userSelection.resultData[i]["@attributes"].longitude + "&units=imperial&appid=" + keys.OPENWEATHER)
         let campsiteDataIndex = i;
-         $.ajax({
-             url: "https://api.openweathermap.org/data/2.5/weather?lat="+ userSelection.resultData[i]["@attributes"].latitude + "&lon=" + userSelection.resultData[i]["@attributes"].longitude + "&units=imperial&appid="+keys.OPENWEATHER,
+        $.ajax({
+            url: "https://api.openweathermap.org/data/2.5/weather?lat=" + userSelection.resultData[i]["@attributes"].latitude + "&lon=" + userSelection.resultData[i]["@attributes"].longitude + "&units=imperial&appid=" + keys.OPENWEATHER,
             method: "GET"
-            }).then(function(currentWeather){
-               
-                console.log(currentWeather);
-                const card = document.createElement('div');
-                card.classList = 'card-body';
-                var iconurl = "http://openweathermap.org/img/w/" + currentWeather.weather[0].icon + ".png";
-                console.log(iconurl)
-                //construct card content
-                const cardContent = document.createElement('div');
-                cardContent.classList = "small col s6 m3"
-                cardContent.innerHTML =
-                    `<div class="card small">
+        }).then(function (currentWeather) {
+
+            console.log(currentWeather);
+            const card = document.createElement('div');
+            card.classList = 'card-body';
+            var iconurl = "http://openweathermap.org/img/w/" + currentWeather.weather[0].icon + ".png";
+            console.log(iconurl)
+            //construct card content
+            const cardContent = document.createElement('div');
+            cardContent.classList = "small col s6 m3"
+            cardContent.innerHTML =
+                `<div class="card small">
                         <div id="card-img" class="card-image waves-effect waves-block waves-light">
                             <img class="activator" src="./assets/images/morning camp.jpg">
                         </div>
@@ -114,46 +114,11 @@ function campgroundCards(campgroundData) {
                             <div id ="weather-temp">temp:${currentWeather.main.temp}</div>
                         </div>
                     </div>`;
-                    campgroundCardEl.append(cardContent);
-        
-            })
+            campgroundCardEl.append(cardContent);
 
-      
-        //access coordinates from camp API and store it to use for weather
-        // userSelection.campLat = userSelection.resultData[0]["@attributes"].latitude;
-        // userSelection.campLon = userSelection.resultData[0]["@attributes"].longitude;
-        // currentWeather();
+        })
     }
 }
-
-//add function to grab weather data here....
-
-// var currentWeather = function(location){
-//     var currentWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=lat="+ userSelection.campLat + "&lon=" + userSelection.campLon + "&units=imperial&appid=a6fe42d269d6db96181cb890742e1fc3";
-//     fetch(currentWeatherAPI).then(function(response){
-//         response.json().then(function(data){
-//             displayWeather(data, location)
-//             console.log(data);
-//         })
-//     });
-// };
-
-// var displayWeather = function(weather){
-//     weatherIcon = weather.weather[0].icon;
-//     var weatherIconImg = document.createElement("img");
-//     weatherIconImg.src = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
-//     weatherIcon.appendChild(weatherIconImg);
-
-//     var weatherTemp = weather.main.temp;
-//     var weatherType = weather.weather.description;
-
-//     console.log(weather);
-
-//     weatherCardTemp.innerHTML = "Temperature: " + weatherTemp;
-//     weatherCardCondition.innerHTML = "Currently: " + weatherType;
-
-
-// };
 
 jQuery.ajaxPrefilter(function (options) {
     if (options.crossDomain && jQuery.support.cors) {
@@ -239,30 +204,30 @@ provinceSelect.addEventListener('change', function () {
 })
 
 // //This is the majority of the persistance storage function
- window.onload = function () {
-     var state = localStorage.getItem("state");
-     $('#state-dropdown-menu').val(state);
-     var province = localStorage.getItem("province");
-     $('#province-dropdown-menu').val(province);
+window.onload = function () {
+    var state = localStorage.getItem("state");
+    $('#state-dropdown-menu').val(state);
+    var province = localStorage.getItem("province");
+    $('#province-dropdown-menu').val(province);
 
-     if (state) {
-         queryValue = stateSelect.options[stateSelect.selectedIndex].value
-         getCampgroundData(queryValue);
-         campgroundCards();
-     }
-     if (province) {
-         queryValue = provinceSelect.options[provinceSelect.selectedIndex].value
-         getCampgroundData(queryValue);
-         campgroundCards();
-     }
- }
- $('#state-dropdown-menu').change(function () {
-     var stateValue = $(this).val();
-     localStorage.setItem("state", stateValue);
- });
- $('#province-dropdown-menu').change(function () {
-     var provinceValue = $(this).val();
-     localStorage.setItem("province", provinceValue);
- });
+    if (state) {
+        queryValue = stateSelect.options[stateSelect.selectedIndex].value
+        getCampgroundData(queryValue);
+        campgroundCards();
+    }
+    if (province) {
+        queryValue = provinceSelect.options[provinceSelect.selectedIndex].value
+        getCampgroundData(queryValue);
+        campgroundCards();
+    }
+}
+$('#state-dropdown-menu').change(function () {
+    var stateValue = $(this).val();
+    localStorage.setItem("state", stateValue);
+});
+$('#province-dropdown-menu').change(function () {
+    var provinceValue = $(this).val();
+    localStorage.setItem("province", provinceValue);
+});
 
 modalBtn.addEventListener('click', modalBtnHandler);
