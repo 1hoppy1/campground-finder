@@ -213,10 +213,13 @@ window.onload = function () {
     if (state) {
         queryValue = stateSelect.options[stateSelect.selectedIndex].value
         getCampgroundData(queryValue);
+
+
     }
     if (province) {
         queryValue = provinceSelect.options[provinceSelect.selectedIndex].value
         getCampgroundData(queryValue);
+
     }
 }
 $('#state-dropdown-menu').change(function () {
@@ -228,4 +231,6 @@ $('#province-dropdown-menu').change(function () {
     localStorage.setItem("province", provinceValue);
 });
 
+
 modalBtn.addEventListener('click', modalBtnHandler);
+
